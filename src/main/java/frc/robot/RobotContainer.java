@@ -27,7 +27,6 @@ public class RobotContainer {
   // The robot's subsystems
   private final GlobalVariables m_variable = new GlobalVariables();
   private final SUB_Elbow m_elbow = new SUB_Elbow();
-  private final SUB_Wrist m_wrist = new SUB_Wrist();
   private final SUB_Elevator m_elevator = new SUB_Elevator();
   private final SUB_Blinkin m_blinkin = new SUB_Blinkin();
   private final SUB_FiniteStateMachine m_finiteStateMachine = new SUB_FiniteStateMachine();
@@ -62,12 +61,12 @@ public class RobotContainer {
     // m_driverControllerTrigger.x().onTrue(new CMD_DriveAlignLeft(m_robotDrive, m_limeLight));
     // m_driverControllerTrigger.b().onTrue(new CMD_DriveAlignRight(m_robotDrive, m_limeLight));
 
-    m_driverControllerTrigger.leftBumper().onTrue(new ConditionalCommand((new CMD_HoldShelf(m_intake, m_elbow, m_elevator, m_wrist, m_finiteStateMachine, m_variable )),
-    new CMD_IntakeShelf(m_elbow, m_elevator, m_intake, m_wrist, m_finiteStateMachine, m_variable), IntakeToggle));
-    m_driverControllerTrigger.rightBumper().onTrue(new ConditionalCommand((new CMD_HoldGround(m_intake, m_elbow, m_elevator, m_wrist, m_finiteStateMachine, m_variable)),
-    new CMD_IntakeGround(m_elbow, m_elevator, m_intake, m_wrist, m_finiteStateMachine, m_variable), IntakeToggle));
+    m_driverControllerTrigger.leftBumper().onTrue(new ConditionalCommand((new CMD_HoldShelf(m_intake, m_elbow, m_elevator, m_finiteStateMachine, m_variable )),
+    new CMD_IntakeShelf(m_elbow, m_elevator, m_intake, m_finiteStateMachine, m_variable), IntakeToggle));
+    m_driverControllerTrigger.rightBumper().onTrue(new ConditionalCommand((new CMD_HoldGround(m_intake, m_elbow, m_elevator, m_finiteStateMachine, m_variable)),
+    new CMD_IntakeGround(m_elbow, m_elevator, m_intake, m_finiteStateMachine, m_variable), IntakeToggle));
     
-    m_driverControllerTrigger.x().onTrue(new CMD_Place(m_elevator, m_intake, m_elbow, m_wrist, m_finiteStateMachine, m_variable));
+    m_driverControllerTrigger.x().onTrue(new CMD_Place(m_elevator, m_intake, m_elbow, m_finiteStateMachine, m_variable));
     m_driverControllerTrigger.a().onTrue(new CMD_ToggleDropLevel(m_variable));
 
     m_driverControllerTrigger.b().onTrue(new CMD_ToggleIntakeState(m_variable));

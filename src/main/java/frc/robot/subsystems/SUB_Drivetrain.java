@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 
 import frc.robot.Constants.*;
-import frc.robot.subsystems.SUB_FiniteStateMachine.RobotState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SUB_Drivetrain extends SubsystemBase {
