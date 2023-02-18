@@ -181,7 +181,7 @@ public final class Constants {
 
       public static final class ElevatorConstants{
         public static final int kElevatorMotorCanID = 17;
-        public static final double kElevatorP = 0.01;
+        public static final double kElevatorP = 0.0025;
         public static final double kElevatorI = 0;
         public static final double kElevatorD = 0.;
         public static final double kElevatorF = 0.033;
