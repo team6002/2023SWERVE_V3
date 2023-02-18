@@ -24,7 +24,6 @@ public class CMD_Stow extends SequentialCommandGroup {
       new CMD_IntakeOff(p_intake),
       new CMD_CheckElbowSafe(p_elevator),
       new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowStow),
-      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorPrep),
       new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorHome)
     );
   }

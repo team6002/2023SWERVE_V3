@@ -26,7 +26,7 @@ public class CMD_ElevatorSetLevel extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (m_variables.getDropLevel() == GlobalConstants.kElevator3rdLevel){
+    if(m_variables.getDropLevel() == GlobalConstants.kElevator3rdLevel){
       m_wantedPosition = ElevatorConstants.kElevatorThirdLevel;
     }else if (m_variables.getDropLevel() == GlobalConstants.kElevator2ndLevel){
       m_wantedPosition = ElevatorConstants.kElevatorSecondLevel;

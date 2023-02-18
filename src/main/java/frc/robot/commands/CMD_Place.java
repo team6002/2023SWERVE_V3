@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -34,7 +35,7 @@ public class CMD_Place extends SequentialCommandGroup {
     m_finiteStateMachine = p_finiteStateMachine;
     addRequirements(m_elevator, m_intake, m_elbow, m_finiteStateMachine);
 
-    if(p_variables.getDropLevel() > 1){
+    if(p_variables.getDropLevel() != 1){
       addCommands(
         new CMD_setState(p_finiteStateMachine, RobotState.SCORING),
         new ParallelCommandGroup(
@@ -61,6 +62,7 @@ public class CMD_Place extends SequentialCommandGroup {
         new CMD_ElevatorSetLevel(p_elevator, p_variables),
         new CMD_IntakeDrop(m_intake, m_variables),
         new WaitCommand(1),
+        new CMD_ElevatorSetPosition(m_elevator, ElevatorConstants.kElevatorPrep),
         new CMD_Stow(m_elevator, m_intake, m_elbow, m_finiteStateMachine)
       );
     }

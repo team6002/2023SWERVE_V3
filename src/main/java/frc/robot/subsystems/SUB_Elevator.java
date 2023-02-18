@@ -51,7 +51,6 @@ public class SUB_Elevator extends SubsystemBase {
       return m_elevatorEncoder.getPosition();
     }
   public void setElevatorOn(){
-    // m_elevatorMotor.set(ElevatorConstants.kElevatorForward);
     m_elevatorMotor.set(.2);
   }
 
@@ -60,7 +59,6 @@ public class SUB_Elevator extends SubsystemBase {
   }
 
   public void setElevatorReverse(){
-    // m_elevatorMotor.set(-ElevatorConstants.kElevatorForward);
     m_elevatorMotor.set(-.2);
   }
 
