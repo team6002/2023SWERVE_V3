@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.GlobalVariables;
 import frc.robot.Constants.ElbowConstants;
@@ -15,22 +14,19 @@ import frc.robot.subsystems.SUB_FiniteStateMachine;
 import frc.robot.subsystems.SUB_Intake;
 import frc.robot.subsystems.SUB_FiniteStateMachine.RobotState;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+
 public class CMD_IntakeGround extends SequentialCommandGroup {
   public CMD_IntakeGround(SUB_Elbow p_elbow, SUB_Elevator p_elevator, SUB_Intake p_intake,
    SUB_FiniteStateMachine p_finiteStamchine, GlobalVariables p_variables) {
     addCommands(
       new CMD_setState(p_finiteStamchine, RobotState.INTAKE),
-      new ParallelCommandGroup(  
-        new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorHome),
-        new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowBackwards)
-      ),
+      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorSafety),
+      new CMD_CheckElbowSafe(p_elevator),
+      new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowGround),
+      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorHome),
       new CMD_IntakeOn(p_intake, p_variables),
       new CMD_IntakeCheck(p_intake),
-      new CMD_IntakeHold(p_intake, p_variables),
-      new CMD_HoldGround(p_intake, p_elbow, p_elevator, p_finiteStamchine, p_variables)
+      new CMD_Hold(p_intake, p_elbow, p_elevator, p_finiteStamchine, p_variables)
     );
   }
 }

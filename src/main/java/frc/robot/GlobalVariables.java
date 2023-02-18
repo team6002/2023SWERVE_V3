@@ -32,14 +32,6 @@ public class GlobalVariables extends SubsystemBase {
     return m_dropLevel;
   }
 
-  public void setStowLocation(int p_Location){
-    m_stowLocation = p_Location;
-  }
-
-  public int getStowLocaton(){
-    return m_stowLocation;
-  }
-
   public void setPickMode(int p_mode){
     m_pickMode = p_mode;
   }

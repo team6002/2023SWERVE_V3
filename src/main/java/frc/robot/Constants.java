@@ -195,14 +195,14 @@ public final class Constants {
         public static final double kElevatorHome = 0;
         public static final double kElevatorStow = 5;
         public static final double kElevatorPrep = 23;//Position for safely moving elbow to score
-        public static final double kElevatorSafety = 15;//maximum value to check if moving elbow endagers robot
+        public static final double kElevatorSafety = 5;//maximum value to check if moving elbow endagers robot
       }
 
       public static final class ElbowConstants{
         public static final int kElbowMotorCanID = 11;
         public static final double kElbowUp = 180;// about 90 degrees up
         public static final double kElbowForwards = 260;// stright forwards
-        public static final double kElbowBackwards = 97;// straight back
+        public static final double kElbowGround = 97;// straight back
         public static final double kElbowP = .00775;//.0075
         public static final double kElbowI = 0;
         public static final double kElbowD = 0.001;

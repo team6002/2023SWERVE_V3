@@ -22,9 +22,10 @@ public class CMD_Stow extends SequentialCommandGroup {
     addCommands(
       new CMD_setState(m_finiteStateMachine, RobotState.STOW),
       new CMD_IntakeOff(p_intake),
-      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorPrep),
-      new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowUp),
       new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorStow),
-      new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowStow));
+      new CMD_CheckElbowSafe(p_elevator),
+      new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowStow),
+      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorHome)
+    );
   }
 }

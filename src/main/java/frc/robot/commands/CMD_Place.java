@@ -35,21 +35,36 @@ public class CMD_Place extends SequentialCommandGroup {
     m_variables = p_variables;
     m_finiteStateMachine = p_finiteStateMachine;
     addRequirements(m_elevator, m_intake, m_elbow, m_finiteStateMachine);
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new CMD_setState(p_finiteStateMachine, RobotState.SCORING),
-      new ParallelCommandGroup(
-        new CMD_ElbowSetPosition(m_elbow, ElbowConstants.kElbowUp),
-        new CMD_ElevatorSetPosition(m_elevator, ElevatorConstants.kElevatorPrep)
-      ),
-      new ParallelCommandGroup(
+
+    if(p_variables.getDropLevel() > 1){
+      addCommands(
+        new CMD_setState(p_finiteStateMachine, RobotState.SCORING),
+        new ParallelCommandGroup(
+          new CMD_ElevatorSetLevel(p_elevator, p_variables),
+          new SequentialCommandGroup(
+            new CMD_CheckElbowSafe(p_elevator),
+            new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowForwards)
+          )
+        ),
+        new CMD_IntakeDrop(m_intake, m_variables),
+        new WaitCommand(1),
+        new CMD_Stow(m_elevator, m_intake, m_elbow, m_finiteStateMachine)
+      );
+    }else{
+      addCommands(
+        new CMD_setState(p_finiteStateMachine, RobotState.SCORING),
+        new ParallelCommandGroup(
+          new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorSafety),
+          new SequentialCommandGroup(
+            new CMD_CheckElbowSafe(p_elevator),
+            new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowForwards)
+          )
+        ),
         new CMD_ElevatorSetLevel(p_elevator, p_variables),
-        new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowForwards)
-      ),
-      new CMD_IntakeDrop(m_intake, m_variables),
-      new WaitCommand(1),
-      new CMD_Stow(m_elevator, m_intake, m_elbow, m_finiteStateMachine)
-    );
+        new CMD_IntakeDrop(m_intake, m_variables),
+        new WaitCommand(1),
+        new CMD_Stow(m_elevator, m_intake, m_elbow, m_finiteStateMachine)
+      );
+    }
   }
 }
