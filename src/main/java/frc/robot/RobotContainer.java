@@ -35,6 +35,7 @@ public class RobotContainer {
   private final SUB_Intake m_intake = new SUB_Intake();
   private final AUTO_Trajectory m_trajectory = new AUTO_Trajectory(m_robotDrive);
   private final BooleanSupplier IntakeToggle = () -> m_finiteStateMachine.getState() == RobotState.INTAKE;
+  private final BooleanSupplier DropGround = () -> m_variable.getDropLevel() == 1;
   // The driver's controller
   XboxController m_operatorController = new XboxController(1);
   CommandXboxController m_driverControllerTrigger = new CommandXboxController(0);
@@ -66,7 +67,11 @@ public class RobotContainer {
     m_driverControllerTrigger.rightBumper().onTrue(new ConditionalCommand((new CMD_Hold(m_intake, m_elbow, m_elevator, m_finiteStateMachine, m_variable)),
     new CMD_IntakeGround(m_elbow, m_elevator, m_intake, m_finiteStateMachine, m_variable), IntakeToggle));
     
-    m_driverControllerTrigger.x().onTrue(new CMD_Place(m_elevator, m_intake, m_elbow, m_finiteStateMachine, m_variable));
+    m_driverControllerTrigger.x().onTrue(new ConditionalCommand(
+      new CMD_PlaceGround(m_elevator, m_intake, m_elbow, m_finiteStateMachine, m_variable),
+      new CMD_Place(m_elevator, m_intake, m_elbow, m_finiteStateMachine, m_variable),
+      DropGround
+    ));
     m_driverControllerTrigger.a().onTrue(new CMD_ToggleDropLevel(m_variable));
 
     m_driverControllerTrigger.b().onTrue(new CMD_ToggleIntakeState(m_variable));
