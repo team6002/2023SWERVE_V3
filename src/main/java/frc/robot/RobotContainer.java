@@ -55,17 +55,19 @@ public class RobotContainer {
   boolean pressed = false;
   private void configureButtonBindings() {
 
-    m_driverControllerTrigger.back().onTrue(new InstantCommand(() -> zeroGyroAngle()));
+    m_driverControllerTrigger.povUp().onTrue(new InstantCommand(() -> zeroGyroAngle()));
 
 
     // m_driverControllerTrigger.y().onTrue(new CMD_DriveAlignTag(m_robotDrive, m_limeLight));
     // m_driverControllerTrigger.x().onTrue(new CMD_DriveAlignLeft(m_robotDrive, m_limeLight));
     // m_driverControllerTrigger.b().onTrue(new CMD_DriveAlignRight(m_robotDrive, m_limeLight));
 
-    m_driverControllerTrigger.leftBumper().onTrue(new ConditionalCommand((new CMD_Hold(m_intake, m_elbow, m_elevator, m_finiteStateMachine, m_variable )),
-    new CMD_IntakeShelf(m_elbow, m_elevator, m_intake, m_finiteStateMachine, m_variable), IntakeToggle));
-    m_driverControllerTrigger.rightBumper().onTrue(new ConditionalCommand((new CMD_Hold(m_intake, m_elbow, m_elevator, m_finiteStateMachine, m_variable)),
-    new CMD_IntakeGround(m_elbow, m_elevator, m_intake, m_finiteStateMachine, m_variable), IntakeToggle));
+    m_driverControllerTrigger.leftBumper().onTrue(new ConditionalCommand((
+      new CMD_IntakeShelf(m_elbow, m_elevator, m_intake, m_finiteStateMachine, m_variable)
+        .until(m_driverControllerTrigger.back().onTrue(new CMD_Hold(m_intake, m_elbow, m_elevator, m_finiteStateMachine, m_variable)))),
+      new CMD_IntakeGround(m_elbow, m_elevator, m_intake, m_finiteStateMachine, m_variable)
+        .until(m_driverControllerTrigger.back().onTrue(new CMD_Hold(m_intake, m_elbow, m_elevator, m_finiteStateMachine, m_variable)))
+      ,IntakeToggle));
     
     m_driverControllerTrigger.x().onTrue(new ConditionalCommand(
       new CMD_PlaceGround(m_elevator, m_intake, m_elbow, m_finiteStateMachine, m_variable),
@@ -75,7 +77,6 @@ public class RobotContainer {
     m_driverControllerTrigger.a().onTrue(new CMD_ToggleDropLevel(m_variable));
 
     m_driverControllerTrigger.b().onTrue(new CMD_ToggleIntakeState(m_variable));
-    // m_driverControllerTrigger.b().onTrue(new AUTO_Test(m_trajectory));
   }
 
     public void zeroGyroAngle() {
