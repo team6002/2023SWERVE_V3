@@ -16,9 +16,7 @@ import frc.robot.subsystems.SUB_FiniteStateMachine;
 import frc.robot.subsystems.SUB_Intake;
 import frc.robot.subsystems.SUB_FiniteStateMachine.RobotState;
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
-// information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+
 public class CMD_Place extends SequentialCommandGroup {
   /** Creates a new CMD_PlaceThirdLevel. */
   SUB_Elevator m_elevator;
@@ -54,7 +52,7 @@ public class CMD_Place extends SequentialCommandGroup {
       addCommands(
         new CMD_setState(p_finiteStateMachine, RobotState.SCORING),
         new ParallelCommandGroup(
-          new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorSafety),
+          new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorPrep),
           new SequentialCommandGroup(
             new CMD_CheckElbowSafe(p_elevator),
             new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowForwards)

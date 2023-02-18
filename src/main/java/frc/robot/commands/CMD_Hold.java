@@ -22,7 +22,7 @@ public class CMD_Hold extends SequentialCommandGroup {
     addCommands(
       new CMD_setState(p_finiteStateMachine, RobotState.STOW),
       new CMD_IntakeHold(p_intake, p_variables),
-      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorSafety),
+      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorPrep),
       new CMD_CheckElbowSafe(p_elevator),
       new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowStow),
       new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorStow)

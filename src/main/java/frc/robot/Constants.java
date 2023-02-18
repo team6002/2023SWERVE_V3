@@ -181,37 +181,35 @@ public final class Constants {
 
       public static final class ElevatorConstants{
         public static final int kElevatorMotorCanID = 17;
-        public static final double kElevatorP = 0;
+        public static final double kElevatorP = 0.01;
         public static final double kElevatorI = 0;
         public static final double kElevatorD = 0.;
-        public static final double kElevatorF = 0.013;
-        public static final double kElevatorOffset = -.487;
+        public static final double kElevatorF = 0.033;
+        public static final double kElevatorOffset = 0;
         public static final double kPowerLimit = .2;
-        public static final double kElevatorMax = 50;
-        public static final double kElevatorShelf = 50;
-        public static final double kElevatorFirstLevel = 23;// for placeing forwards
-        public static final double kElevatorSecondLevel = 30;  
-        public static final double kElevatorThirdLevel = 50;
+        public static final double kElevatorMax = 40;
+        public static final double kElevatorShelf = 40;
+        public static final double kElevatorFirstLevel = 0;// for placing forwards
+        public static final double kElevatorSecondLevel = 15;  
+        public static final double kElevatorThirdLevel = 33;
         public static final double kElevatorHome = 0;
-        public static final double kElevatorStow = 5;
-        public static final double kElevatorPrep = 23;//Position for safely moving elbow to score
+        public static final double kElevatorStow = 0;
+        public static final double kElevatorPrep = 7.5;//Position for safely moving elbow to score
         public static final double kElevatorSafety = 5;//maximum value to check if moving elbow endagers robot
       }
 
       public static final class ElbowConstants{
         public static final int kElbowMotorCanID = 11;
-        public static final double kElbowUp = 180;// about 90 degrees up
-        public static final double kElbowForwards = 260;// stright forwards
-        public static final double kElbowGround = 97;// straight back
-        public static final double kElbowP = .00775;//.0075
+        public static final double kElbowUp = 195;// about 90 degrees up
+        public static final double kElbowForwards = 125;// stright forwards
+        public static final double kElbowGround = 92.5;
+        public static final double kElbowP = .01;
         public static final double kElbowI = 0;
-        public static final double kElbowD = 0.001;
-        public static final double kElbowF = 0.0006;
+        public static final double kElbowD = 0;
+        public static final double kElbowF = 0.0005;
         public static final double kElbowMinOutput = -0.25;
         public static final double kElbowMaxOutput = 0.25;
-        public static final double kElbowStow = 218;// when wrist faces forwards
-        public static final double kElbowLift = 200;
-        ;
+        public static final double kElbowStow = 195;
       }
 
       public static final class GlobalConstants{

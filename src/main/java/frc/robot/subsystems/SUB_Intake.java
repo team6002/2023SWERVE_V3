@@ -11,22 +11,22 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants.IntakeConstants;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SUB_Intake extends SubsystemBase {
     private final CANSparkMax m_intakeMotor;
     private final SparkMaxPIDController m_intakeMotorPIDController;
     private final DigitalInput m_sensor;
-  /** Creates a new SUB_Intake. */
   public SUB_Intake() {
     m_intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorCanID, MotorType.kBrushless);
     m_intakeMotorPIDController = m_intakeMotor.getPIDController();
+    m_intakeMotor.setInverted(true);
     m_sensor = new DigitalInput(1);
     m_intakeMotor.setIdleMode(IdleMode.kBrake);
   }
 
   public void setIntakeForward(){
-    // m_intakeMotorPIDController.setReference(IntakeConstants.kIntakeForward, CANSparkMax.ControlType.kVelocity);
     m_intakeMotor.set(IntakeConstants.kIntakeForwardPower);
   }
 
@@ -35,7 +35,6 @@ public class SUB_Intake extends SubsystemBase {
   }
 
   public void setIntakeReverse(){
-    // m_intakeMotorPIDController.setReference(-IntakeConstants.kIntakeForward, CANSparkMax.ControlType.kVelocity);
     m_intakeMotor.set(-IntakeConstants.kIntakeForwardPower);
   }
 
@@ -51,7 +50,6 @@ public class SUB_Intake extends SubsystemBase {
 
   public void setHoldCurrent(){
     m_intakeMotor.setSmartCurrentLimit(5);
-    // System.out.println(m_intakeMotor.getOutputCurrent());
   }
 
   public void setPower(double speed){
@@ -64,6 +62,6 @@ public class SUB_Intake extends SubsystemBase {
 
   @Override
   public void periodic(){
-    // if we have a game piece, make the led strip sky blue colored
+    SmartDashboard.putNumber("intake current", getCurrent());
   }
 }

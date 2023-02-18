@@ -93,8 +93,8 @@ public class SUB_Elbow extends SubsystemBase {
     // double m_I = ElbowConstants.kElbowI;
     // double m_D = ElbowConstants.kElbowD;
     // double m_F = ElbowConstants.kElbowF;
-    // double m_minOutput = 0;
-    // double m_maxOutput = 0;
+    // double m_minOutput = 0.1;
+    // double m_maxOutput = 0.1;
     public void telemetry(){
 
       SmartDashboard.putNumber("elbow position", m_elbowEncoder.getPosition());
@@ -106,7 +106,7 @@ public class SUB_Elbow extends SubsystemBase {
     //   m_F = SmartDashboard.getNumber("Elbow F", m_F);
     //   m_minOutput = SmartDashboard.getNumber("Min Elbow Output", m_minOutput);
     //   m_maxOutput = SmartDashboard.getNumber("Max Elbow Output", m_maxOutput);
-        // m_wantedPosition = SmartDashboard.getNumber("wantedPosition", m_wantedPosition);
+    // m_wantedPosition = SmartDashboard.getNumber("wantedPosition", m_wantedPosition);
 
     //   SmartDashboard.putNumber("Elbow P", m_P);
     //   SmartDashboard.putNumber("Elbow I", m_I);
@@ -114,22 +114,22 @@ public class SUB_Elbow extends SubsystemBase {
     //   SmartDashboard.putNumber("Elbow F", m_F);
     //   SmartDashboard.putNumber("Min Elbow Output", m_minOutput);
     //   SmartDashboard.putNumber("Max Elbow Output", m_maxOutput);
-      // SmartDashboard.putNumber("wantedPosition", m_wantedPosition);
-    
+    //   SmartDashboard.putNumber("wantedPosition", m_wantedPosition);
+        
     //   m_elbowMotorPIDController.setP(m_P,1);
     //   m_elbowMotorPIDController.setI(m_I,1);
     //   m_elbowMotorPIDController.setD(m_D,1);
-    //   m_elbowMotorPIDController.setFF(Math.cos(Units.degreesToRadians(m_wantedPosition-90))*m_F,1);
+    //   m_elbowMotorPIDController.setFF(m_F,1);
+    //   m_elbowMotorPIDController.setFF(Math.cos(Units.degreesToRadians(m_wantedPosition-90)) * .0002,1);
     //   m_elbowMotorPIDController.setOutputRange(m_minOutput, m_maxOutput, 1);
-      // m_elbowMotorPIDController.setReference(m_wantedPosition, ControlType.kPosition, 1);
+    //   m_elbowMotorPIDController.setReference(m_wantedPosition, ControlType.kPosition, 1);
 
-      // SmartDashboard.putNumber("velocity", m_elbowEncoder.getVelocity());
-      // SmartDashboard.putNumber("output", m_elbowMotor.getAppliedOutput());
-      // SmartDashboard.putNumber("wantedspeed", m_elbowMotor.get());
-      SmartDashboard.putNumber("elbow P", m_elbowMotorPIDController.getP(1));
-      SmartDashboard.putNumber("elbow I", m_elbowMotorPIDController.getI(1));
-      SmartDashboard.putNumber("elbow D", m_elbowMotorPIDController.getD(1));
+    //   SmartDashboard.putNumber("velocity", m_elbowEncoder.getVelocity());
+    //   SmartDashboard.putNumber("output", m_elbowMotor.getAppliedOutput());
+    //   SmartDashboard.putNumber("wantedspeed", m_elbowMotor.get());
+
       SmartDashboard.putNumber("elbow F", m_elbowMotorPIDController.getFF(1));
+      SmartDashboard.putNumber("elbow P", m_elbowMotorPIDController.getP(1));
       SmartDashboard.putNumber("elbowSetpoint", m_wantedPosition);
     }
 }

@@ -25,8 +25,8 @@ public class SUB_Elevator extends SubsystemBase {
       m_elevatorMotorPIDController = m_elevatorMotor.getPIDController();
       m_elevatorEncoder = m_elevatorMotor.getEncoder();
       m_elevatorMotor.restoreFactoryDefaults();
-      m_elevatorEncoder.setPositionConversionFactor(.641);
-      m_elevatorEncoder.setVelocityConversionFactor(0.641/60);
+      m_elevatorEncoder.setPositionConversionFactor(.677);
+      m_elevatorEncoder.setVelocityConversionFactor(.0113);
       m_elevatorMotor.setInverted(true);
       m_elevatorMotorPIDController.setP(ElevatorConstants.kElevatorP,1);
       m_elevatorMotorPIDController.setI(ElevatorConstants.kElevatorI,1);
@@ -36,8 +36,8 @@ public class SUB_Elevator extends SubsystemBase {
       m_elevatorMotor.setIdleMode(IdleMode.kCoast);
       m_elevatorMotorPIDController.setPositionPIDWrappingEnabled(false);
       m_elevatorMotorPIDController.setOutputRange(-1, 1, 1);
-      m_elevatorMotorPIDController.setSmartMotionMaxVelocity(40, 1);
-      m_elevatorMotorPIDController.setSmartMotionMaxAccel(40, 1);
+      m_elevatorMotorPIDController.setSmartMotionMaxVelocity(30, 1);
+      m_elevatorMotorPIDController.setSmartMotionMaxAccel(30, 1);
       m_elevatorMotorPIDController.setSmartMotionAllowedClosedLoopError(1, 1);
       m_elevatorMotorPIDController.setSmartMotionAccelStrategy(SparkMaxPIDController.AccelStrategy.kTrapezoidal, 1);
       m_elevatorMotor.burnFlash();
@@ -78,31 +78,31 @@ public class SUB_Elevator extends SubsystemBase {
   // double m_I = 0;//elevatorConstants.kelevatorI;
   // double m_D = 0;//elevatorConstants.kelevatorD;
   // double m_F = 0;//elevatorConstants.kelevatorF;
-  double m_wantedPosition = 0;
+  // double m_wantedPosition = 0;
   public void telemetry(){
     SmartDashboard.putNumber("elevator Position", m_elevatorEncoder.getPosition());
     SmartDashboard.putNumber("elevator Position (numeric)", m_elevatorEncoder.getPosition());
 
-    // m_P = SmartDashboard.getNumber("P", m_P);
-    // m_I = SmartDashboard.getNumber("I", m_I);
-    // m_D = SmartDashboard.getNumber("D", m_D);
-    // m_F = SmartDashboard.getNumber("F", m_F);
-    // m_wantedPosition = SmartDashboard.getNumber("wantedPosition", m_wantedPosition);
+  //   m_P = SmartDashboard.getNumber("P", m_P);
+  //   m_I = SmartDashboard.getNumber("I", m_I);
+  //   m_D = SmartDashboard.getNumber("D", m_D);
+  //   m_F = SmartDashboard.getNumber("F", m_F);
+  //   m_wantedPosition = SmartDashboard.getNumber("wantedPosition", m_wantedPosition);
 
-    // SmartDashboard.putNumber("P", m_P);
-    // SmartDashboard.putNumber("I", m_I);
-    // SmartDashboard.putNumber("D", m_D);
-    // SmartDashboard.putNumber("F", m_F);
-    // SmartDashboard.putNumber("wantedPosition", m_wantedPosition);
+  //   SmartDashboard.putNumber("P", m_P);
+  //   SmartDashboard.putNumber("I", m_I);
+  //   SmartDashboard.putNumber("D", m_D);
+  //   SmartDashboard.putNumber("F", m_F);
+  //   SmartDashboard.putNumber("wantedPosition", m_wantedPosition);
    
-    // m_elevatorMotorPIDController.setP(m_P,1);
-    // m_elevatorMotorPIDController.setI(m_I,1);
-    // m_elevatorMotorPIDController.setD(m_D,1);
-    // m_elevatorMotorPIDController.setFF(m_F,1);
-    // m_elevatorMotorPIDController.setReference(m_wantedPosition, ControlType.kSmartMotion, 1);
+  //   m_elevatorMotorPIDController.setP(m_P,1);
+  //   m_elevatorMotorPIDController.setI(m_I,1);
+  //   m_elevatorMotorPIDController.setD(m_D,1);
+  //   m_elevatorMotorPIDController.setFF(m_F,1);
+  //   m_elevatorMotorPIDController.setReference(m_wantedPosition, ControlType.kSmartMotion, 1);
 
-    // SmartDashboard.putNumber("velocity", m_elevatorEncoder.getVelocity());
-    // SmartDashboard.putNumber("output", m_elevatorMotor.getAppliedOutput());
-    // SmartDashboard.putNumber("wantedspeed", m_elevatorMotor.get());
+  //   SmartDashboard.putNumber("velocity", m_elevatorEncoder.getVelocity());
+  //   SmartDashboard.putNumber("output", m_elevatorMotor.getAppliedOutput());
+  //   SmartDashboard.putNumber("wantedspeed", m_elevatorMotor.get());
    }
 }

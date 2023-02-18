@@ -27,8 +27,9 @@ public class CMD_IntakeCheck extends CommandBase {
   public void execute() {
     if (m_intake.getCurrent() >= IntakeConstants.kIntakeConeDetectedCurrent){
       m_detected = true;
-    }else 
-    m_detected = false;
+    }else{
+      m_detected = false;
+    }
   }
 
   // Called once the command ends or is interrupted.

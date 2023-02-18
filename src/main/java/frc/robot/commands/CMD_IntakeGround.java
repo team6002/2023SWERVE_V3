@@ -20,7 +20,7 @@ public class CMD_IntakeGround extends SequentialCommandGroup {
    SUB_FiniteStateMachine p_finiteStamchine, GlobalVariables p_variables) {
     addCommands(
       new CMD_setState(p_finiteStamchine, RobotState.INTAKE),
-      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorSafety),
+      new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorPrep),
       new CMD_CheckElbowSafe(p_elevator),
       new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowGround),
       new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorHome),

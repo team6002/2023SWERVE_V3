@@ -57,6 +57,7 @@ public class Robot extends TimedRobot {
     // commands, running already-scheduled comm.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    SmartDashboard.putData("command",CommandScheduler.getInstance());
     
     // m_robotContainer.updateOdometry();
 
