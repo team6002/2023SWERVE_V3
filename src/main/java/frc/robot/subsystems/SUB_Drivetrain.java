@@ -60,6 +60,7 @@ public class SUB_Drivetrain extends SubsystemBase {
 
   // The gyro sensor
   private final AHRS m_navx = new AHRS(Port.kMXP);
+
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
       DriveConstants.kDriveKinematics,
@@ -106,7 +107,7 @@ public class SUB_Drivetrain extends SubsystemBase {
   }
 
   public void telemetry(){
-        // SmartDashboard.putNumber("Odometry x", Units.metersToInches(getX()));
+        SmartDashboard.putNumber("Odometry x", Units.metersToInches(getX()));
         // SmartDashboard.putNumber("Odometry y", Units.metersToInches(getY()));
         // SmartDashboard.putNumber("Odometry yaw", m_odometry.getPoseMeters().getRotation().getDegrees());
   }

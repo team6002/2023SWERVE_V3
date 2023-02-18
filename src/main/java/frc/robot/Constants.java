@@ -19,7 +19,7 @@ import edu.wpi.first.math.util.Units;
  * constants. This class should not be used for any other purpose. All constants should be declared
  * globally (i.e. public static). Do not put anything functional in this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
 
@@ -47,7 +47,7 @@ public final class Constants {
         public static final double kTurnF = 0;
 
         //Drive Motor Constants
-        public static final double kDriveEncoderPositionFactor = positionConversionFactor;
+        public static final double kDriveEncoderPositionFactor = positionConversionFactor * .67;
         public static final double kDriveEncoderVelocityFactor = positionConversionFactor / 60.0;
         public static final double kDriveMinOutput = -1;
         public static final double kDriveMaxOutput = 1;
@@ -191,7 +191,7 @@ public final class Constants {
         public static final double kElevatorShelf = 40;
         public static final double kElevatorFirstLevel = 0;// for placing forwards
         public static final double kElevatorSecondLevel = 15;  
-        public static final double kElevatorThirdLevel = 33;
+        public static final double kElevatorThirdLevel = 36;
         public static final double kElevatorHome = 0;
         public static final double kElevatorStow = 0;
         public static final double kElevatorPrep = 7.5;//Position for safely moving elbow to score
@@ -201,7 +201,7 @@ public final class Constants {
       public static final class ElbowConstants{
         public static final int kElbowMotorCanID = 11;
         public static final double kElbowUp = 195;// about 90 degrees up
-        public static final double kElbowForwards = 125;// stright forwards
+        public static final double kElbowForwards = 135;// stright forwards
         public static final double kElbowGround = 92.5;
         public static final double kElbowP = .01;
         public static final double kElbowI = 0;
@@ -210,6 +210,7 @@ public final class Constants {
         public static final double kElbowMinOutput = -0.25;
         public static final double kElbowMaxOutput = 0.25;
         public static final double kElbowStow = 195;
+        public static final double kElbowShelf = 125;// stright forwards
       }
 
       public static final class GlobalConstants{

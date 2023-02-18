@@ -24,7 +24,7 @@ public class CMD_IntakeShelf extends SequentialCommandGroup {
       new SequentialCommandGroup(
         new CMD_ElevatorSetPosition(p_elevator, ElevatorConstants.kElevatorShelf),
         new CMD_CheckElbowSafe(p_elevator),
-        new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowForwards)
+        new CMD_ElbowSetPosition(p_elbow, ElbowConstants.kElbowShelf)
       ),
       new CMD_IntakeOn(p_intake, p_variables),
       new CMD_IntakeCheck(p_intake),

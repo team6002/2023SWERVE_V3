@@ -27,11 +27,11 @@ import frc.robot.subsystems.SUB_Drivetrain;
 
 public class AUTO_Trajectory {
     
-    String TestJSON = "output/TEST2M.wpilib.json";
+    // String TestJSON = "output/TEST2M.wpilib.json";
 
     private SUB_Drivetrain m_drivetrain;
     public Trajectory testTrajectory;
-    public Trajectory test2Trajectory;
+    // public Trajectory test2Trajectory;
     public Trajectory PathweaverTrajectory;
 
     public AUTO_Trajectory(SUB_Drivetrain drivetrain){
@@ -50,7 +50,7 @@ public class AUTO_Trajectory {
         TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, new Rotation2d(0)),
         List.of(),
-        new Pose2d(Units.inchesToMeters(100), 0, new Rotation2d(Math.toDegrees(0))),
+        new Pose2d(Units.inchesToMeters(12), 0, new Rotation2d(Math.toDegrees(0))),
         config);
 
         // test2Trajectory =
@@ -61,12 +61,12 @@ public class AUTO_Trajectory {
         // config);
 
 
-        try {
-            Path TestPath = Filesystem.getDeployDirectory().toPath().resolve(TestJSON);
-            PathweaverTrajectory = TrajectoryUtil.fromPathweaverJson(TestPath);
-        } catch (IOException e) {
-            DriverStation.reportError("Unable to open trajectory", e.getStackTrace());
-    }           
+    //     try {
+    //         Path TestPath = Filesystem.getDeployDirectory().toPath().resolve(TestJSON);
+    //         PathweaverTrajectory = TrajectoryUtil.fromPathweaverJson(TestPath);
+    //     } catch (IOException e) {
+    //         DriverStation.reportError("Unable to open trajectory", e.getStackTrace());
+    // }           
     }
   
     public Command driveTrajectory(Trajectory trajectory) {

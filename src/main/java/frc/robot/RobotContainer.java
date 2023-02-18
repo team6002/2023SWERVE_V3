@@ -7,8 +7,8 @@ package frc.robot;
 
 import java.util.function.BooleanSupplier;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.*;
@@ -37,7 +37,7 @@ public class RobotContainer {
   private final BooleanSupplier IntakeToggle = () -> m_finiteStateMachine.getState() == RobotState.INTAKE;
   private final BooleanSupplier DropGround = () -> m_variable.getDropLevel() == 1;
   // The driver's controller
-  XboxController m_operatorController = new XboxController(1);
+  CommandXboxController m_operatorController = new CommandXboxController(1);
   CommandXboxController m_driverControllerTrigger = new CommandXboxController(0);
   Trigger xButton = m_driverControllerTrigger.leftBumper();
 
@@ -55,7 +55,7 @@ public class RobotContainer {
   boolean pressed = false;
   private void configureButtonBindings() {
 
-    m_driverControllerTrigger.back().onTrue(new CMD_ElbowSetPosition(m_elbow, ElbowConstants.kElbowUp));
+    m_driverControllerTrigger.back().onTrue(new InstantCommand(() -> zeroGyroAngle()));
 
 
     // m_driverControllerTrigger.y().onTrue(new CMD_DriveAlignTag(m_robotDrive, m_limeLight));
@@ -80,7 +80,6 @@ public class RobotContainer {
 
     public void zeroGyroAngle() {
       m_robotDrive.zeroAngle();
-
     }
 
 }
