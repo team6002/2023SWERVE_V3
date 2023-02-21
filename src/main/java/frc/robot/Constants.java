@@ -32,11 +32,11 @@ public final class Constants {
         public static final double kpinonTeeth = 14;
         public static final double kwheeldiameter = Units.inchesToMeters(3);   // 3in 
         public static final double kdriveReduction = (45*22)/(kpinonTeeth*15);  //(16.0 / 32.0) * (15.0 / 45.0);
-        public static final double positionConversionFactor = (Math.PI * kwheeldiameter) / kdriveReduction;
+        public static final double positionConversionFactor = (Math.PI * kwheeldiameter) / kdriveReduction * .67;
         public static final double ksteeringReduction = (10.0 / 30.0 ) * (18.0 / 96.0);
         public static final double analogPositionConversionFactor = (2 * Math.PI / 3.3);
         // //drive motor pid
-        public static final double kDriveP = 0.1;  
+        public static final double kDriveP = 0.1;
         public static final double kDriveI = 0;
         public static final double kDriveD = 0.04;//0.1;
         public static final double kDriveF = 0.165;
@@ -47,7 +47,7 @@ public final class Constants {
         public static final double kTurnF = 0;
 
         //Drive Motor Constants
-        public static final double kDriveEncoderPositionFactor = positionConversionFactor * .67;
+        public static final double kDriveEncoderPositionFactor = positionConversionFactor;
         public static final double kDriveEncoderVelocityFactor = positionConversionFactor / 60.0;
         public static final double kDriveMinOutput = -1;
         public static final double kDriveMaxOutput = 1;
@@ -149,8 +149,8 @@ public final class Constants {
     public static final class AutoConstants {
         // public static final double kMaxSpeedMetersPerSecond = DriveConstants.kMaxSpeedMetersPerSecond;
         // public static final double kMaxAccelerationMetersPerSecondSquared = DriveConstants.kMaxSpeedMetersPerSecond;
-        public static final double kMaxSpeedMetersPerSecond = Units.inchesToMeters(75);
-        public static final double kMaxAccelerationMetersPerSecondSquared = Units.inchesToMeters(100);
+        public static final double kMaxSpeedMetersPerSecond = Units.inchesToMeters(50);//75
+        public static final double kMaxAccelerationMetersPerSecondSquared = Units.inchesToMeters(25);//100
      
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI / 4;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI / 4;

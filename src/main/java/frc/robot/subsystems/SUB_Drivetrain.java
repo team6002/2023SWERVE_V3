@@ -12,6 +12,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -60,11 +61,12 @@ public class SUB_Drivetrain extends SubsystemBase {
 
   // The gyro sensor
   private final AHRS m_navx = new AHRS(Port.kMXP);
+  private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
 
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
       DriveConstants.kDriveKinematics,
-      Rotation2d.fromDegrees(m_navx.getAngle()),
+      Rotation2d.fromDegrees(m_gyro.getAngle()),
       getSwervePosition()
       );
 
@@ -85,8 +87,8 @@ public class SUB_Drivetrain extends SubsystemBase {
     m_rearLeft.updateSmartDashboard();
     m_rearRight.updateSmartDashboard();
 
-    SmartDashboard.putNumber("m_navx.getAngle()", getAngle());
-    SmartDashboard.putNumber("m_navx.getRotation2d()", m_navx.getRotation2d().getDegrees());
+    SmartDashboard.putNumber("m_gyro.getAngle()", getAngle());
+    SmartDashboard.putNumber("m_gyro.getRotation2d()", m_gyro.getRotation2d().getDegrees());
   }
   public SwerveModulePosition[] getSwervePosition(){
     return new SwerveModulePosition[] {
@@ -101,7 +103,7 @@ public class SUB_Drivetrain extends SubsystemBase {
     updateDashboardDrive();
     // Update the odometry in the periodic block
     m_odometry.update(
-        Rotation2d.fromDegrees(m_navx.getAngle()),
+        Rotation2d.fromDegrees(m_gyro.getAngle()),
         getSwervePosition());
         telemetry();
   }
@@ -129,9 +131,9 @@ public class SUB_Drivetrain extends SubsystemBase {
     return m_odometry.getPoseMeters().getY();
   }
 
-  public double getPitch(){
-    return m_navx.getPitch();
-  }
+  // public double getPitch(){
+  //   return m_gyro.getPitch();
+  // }
 
   /**
    * Resets the odometry to the specified pose.
@@ -140,7 +142,7 @@ public class SUB_Drivetrain extends SubsystemBase {
    */
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(
-        Rotation2d.fromDegrees(m_navx.getAngle()),
+        Rotation2d.fromDegrees(m_gyro.getAngle()),
         getSwervePosition(),
         pose);
   }
@@ -162,7 +164,7 @@ public class SUB_Drivetrain extends SubsystemBase {
 
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
-            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_navx.getRotation2d())
+            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d())
             : new ChassisSpeeds(xSpeed, ySpeed, rot));
     SwerveDriveKinematics.desaturateWheelSpeeds(
         swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
@@ -184,7 +186,7 @@ public class SUB_Drivetrain extends SubsystemBase {
 
   public void setOdometryPositionInches(double X, double Y, double Angle){//put Inches in this function
     Pose2d p_wantedPose2d = new Pose2d(Units.inchesToMeters(X),Units.inchesToMeters(Y),Rotation2d.fromDegrees(Angle)); 
-    m_odometry.resetPosition(m_navx.getRotation2d(), getSwervePosition(), p_wantedPose2d);
+    m_odometry.resetPosition(m_gyro.getRotation2d(), getSwervePosition(), p_wantedPose2d);
   }
   /**
    * Sets the swerve ModuleStates.
@@ -210,7 +212,7 @@ public class SUB_Drivetrain extends SubsystemBase {
 
   /** Zeroes the Angle of the robot. */
   public void zeroAngle() {
-    m_navx.zeroYaw();
+    m_gyro.reset();
   }
 
   /**
@@ -219,7 +221,7 @@ public class SUB_Drivetrain extends SubsystemBase {
    * @return the robot's Angle in degrees, from -180 to 180
    */
   public double getAngle() {
-    return Rotation2d.fromDegrees(m_navx.getAngle()).getDegrees();
+    return Rotation2d.fromDegrees(m_gyro.getAngle()).getDegrees();
   }
 
   /**
@@ -228,7 +230,7 @@ public class SUB_Drivetrain extends SubsystemBase {
    * @return The turn rate of the robot, in degrees per second
    */
   public double getTurnRate() {
-    return m_navx.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+    return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 
   public void setWantedHeight(int p_height){

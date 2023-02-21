@@ -7,6 +7,8 @@ package frc.robot;
 
 import java.util.function.BooleanSupplier;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -40,6 +42,7 @@ public class RobotContainer {
   CommandXboxController m_operatorController = new CommandXboxController(1);
   CommandXboxController m_driverControllerTrigger = new CommandXboxController(0);
   Trigger xButton = m_driverControllerTrigger.leftBumper();
+  Pose2d m_reset = new Pose2d(0, 0, Rotation2d.fromDegrees(0));
 
   /**
    * The container for the robot. Contains subsystems, IO devices, and commands.
@@ -56,7 +59,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     m_driverControllerTrigger.povUp().onTrue(new InstantCommand(() -> zeroGyroAngle()));
-
+    m_driverControllerTrigger.povDown().onTrue(new InstantCommand(() -> m_robotDrive.resetOdometry(m_reset)));
 
     // m_driverControllerTrigger.y().onTrue(new CMD_DriveAlignTag(m_robotDrive, m_limeLight));
     // m_driverControllerTrigger.x().onTrue(new CMD_DriveAlignLeft(m_robotDrive, m_limeLight));

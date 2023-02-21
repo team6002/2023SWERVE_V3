@@ -26,15 +26,15 @@ public class CMD_AutoBalance extends CommandBase {
 
   @Override
   public void execute() {
-    double pitchError = 0 - m_drivetrain.getPitch();
-    if(pitchError > 5){
-      m_drivetrain.drive(0, 0.01, 0, false);
-    }else if(pitchError < -5){
-      m_drivetrain.drive(0, -0.01, 0, false);
-    }else{
-      m_drivetrain.drive(0, 0, 0, false);
-      m_isFinished = true;
-    }
+    // double pitchError = 0 - m_drivetrain.getPitch();
+    // if(pitchError > 5){
+    //   m_drivetrain.drive(0, 0.01, 0, false);
+    // }else if(pitchError < -5){
+    //   m_drivetrain.drive(0, -0.01, 0, false);
+    // }else{
+    //   m_drivetrain.drive(0, 0, 0, false);
+    //   m_isFinished = true;
+    // }
   }
 
   @Override

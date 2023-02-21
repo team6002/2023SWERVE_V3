@@ -31,18 +31,25 @@ public class AUTO_Trajectory {
 
     private SUB_Drivetrain m_drivetrain;
     public Trajectory testTrajectory;
-    // public Trajectory test2Trajectory;
+    public Trajectory test2Trajectory;
     public Trajectory PathweaverTrajectory;
 
     public AUTO_Trajectory(SUB_Drivetrain drivetrain){
         m_drivetrain = drivetrain;
 
-        TrajectoryConfig config =
+        TrajectoryConfig forwardsTrajectoryConfig =
             new TrajectoryConfig(
                 AutoConstants.kMaxSpeedMetersPerSecond,
                 AutoConstants.kMaxAccelerationMetersPerSecondSquared)
                 // Add kinematics to ensure max speed is actually obeyed
-                .setKinematics(DriveConstants.kDriveKinematics);   
+                .setKinematics(DriveConstants.kDriveKinematics).setReversed(false);
+
+        TrajectoryConfig backwardsTrajectoryConfig =
+            new TrajectoryConfig(
+                AutoConstants.kMaxSpeedMetersPerSecond,
+                AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+                // Add kinematics to ensure max speed is actually obeyed
+                .setKinematics(DriveConstants.kDriveKinematics).setReversed(true);  
       
         //Rotation2d uses RADIANS NOT DEGREES!
         //Use Rotation2d.fromDegrees(desiredDegree) instead
@@ -50,15 +57,15 @@ public class AUTO_Trajectory {
         TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, new Rotation2d(0)),
         List.of(),
-        new Pose2d(Units.inchesToMeters(12), 0, new Rotation2d(Math.toDegrees(0))),
-        config);
+        new Pose2d(Units.inchesToMeters(96), 0, new Rotation2d(Math.toDegrees(0))),
+        forwardsTrajectoryConfig);
 
-        // test2Trajectory =
-        // TrajectoryGenerator.generateTrajectory(
-        // new Pose2d(0, 0, new Rotation2d(0)),
-        // List.of(),
-        // new Pose2d(Units.inchesToMeters(-72), 0, new Rotation2d(Math.toDegrees(0))),
-        // config);
+        test2Trajectory =
+        TrajectoryGenerator.generateTrajectory(
+        new Pose2d(Units.inchesToMeters(96), 0, new Rotation2d(0)),
+        List.of(),
+        new Pose2d(Units.inchesToMeters(0), 0, new Rotation2d(Math.toDegrees(0))),
+        backwardsTrajectoryConfig);
 
 
     //     try {
